@@ -1,9 +1,24 @@
-# cookt
+<p align="center">
+  <img src="frontend/public/icons/icon.svg" width="112" alt="cookt icon: a chef emoji">
+</p>
 
-A self-hosted recipe app for one household. It keeps the family's recipes in one SQLite file, works
-offline as an installable web app on phones and iPads, and uses **local** models for the jobs that
-need judgment: reading a recipe out of a photo, tagging, and suggesting copy edits. Nothing is sent
-to a cloud AI service.
+<h1 align="center">cookt</h1>
+
+<p align="center">
+  A self-hosted recipe app for one household, running on local models.
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/recipe-ipad-dark.webp">
+    <img src="docs/images/recipe-ipad-light.webp" width="820"
+         alt="A recipe on an iPad in landscape: ingredients beside the method, with a 'for next time' note and tappable step timers">
+  </picture>
+</p>
+
+cookt keeps a family's recipes in one SQLite file and works offline as an installable web app on
+phones and iPads. It uses **local** models for the jobs that need judgment: reading a recipe out
+of a photo, tagging, and suggesting copy edits. Nothing is sent to a cloud AI service.
 
 ## What it does
 
@@ -37,6 +52,26 @@ to a cloud AI service.
 - **Read-only MCP server** at `/mcp`, so an assistant can search and read the catalog, meal plan and
   shopping list. It has no tools that write, and a test checks that calling every tool leaves the
   database byte-for-byte unchanged.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/cook-ipad-dark.webp">
+    <img src="docs/images/cook-ipad-light.webp" width="820"
+         alt="Cook mode on an iPad: the ingredient list on the left, the current step in large type, the next step peeking in">
+  </picture>
+  <br><sub>Cook mode on an iPad in landscape.</sub>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/images/library-phone-light.webp" alt="Library on a phone: recipes grouped A to Z with cuisine, course and diet emoji"><br><sub>Library</sub></td>
+    <td align="center" width="25%"><img src="docs/images/method-phone-dark.webp" alt="A recipe's method on a phone in dark mode, with a note for next time and step timers"><br><sub>Method, dark mode</sub></td>
+    <td align="center" width="25%"><img src="docs/images/plan-phone-light.webp" alt="The week plan on a phone, one recipe per day"><br><sub>Week plan</sub></td>
+    <td align="center" width="25%"><img src="docs/images/changes-phone-dark.webp" alt="The Changes feed: each automatic tag with its evidence and a Revert button"><br><sub>Changes, each one revertible</sub></td>
+  </tr>
+</table>
+
+<sub>Screenshots use the sample recipes from <code>scripts/seed_demo.py</code>.</sub>
 
 ## How it fits together
 
@@ -76,6 +111,13 @@ uv run python -m cookt                      # http://127.0.0.1:8088
 ```
 
 On first start the app creates `data/cookt.db`. Import recipes from the **Inbox** page.
+
+To look around first, start it on a throwaway data directory with the sample recipes:
+
+```bash
+uv run python scripts/seed_demo.py /tmp/cookt-demo
+COOKT_DATA_DIR=/tmp/cookt-demo COOKT_RUN_WORKER=0 uv run python -m cookt
+```
 
 For nutrition, download and load the USDA datasets once ([`docs/fdc.md`](docs/fdc.md)):
 
@@ -167,6 +209,12 @@ cd frontend && npx playwright test --project=chromium  # browser acceptance test
 | `backend/cookt/copyedit.py` | Copy-edit proposals for the Review page |
 | `backend/tests/` | pytest, including the parser regression corpus |
 | `frontend/` | React + Vite PWA, service worker template, Playwright tests |
-| `scripts/` | Service control, backup/restore, FDC loader, evals |
+| `scripts/` | Service control, backup/restore, demo data, FDC loader, evals |
 | `deploy/` | systemd user units |
 | `data/` | Runtime data (gitignored) |
+
+## Credits
+
+The app icon is the 🧑‍🍳 emoji from [Noto Emoji](https://github.com/googlefonts/noto-emoji) by
+Google, used under the Apache License 2.0
+([`frontend/public/icons/LICENSE-noto-emoji.txt`](frontend/public/icons/LICENSE-noto-emoji.txt)).
