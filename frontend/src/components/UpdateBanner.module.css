@@ -1,0 +1,32 @@
+.banner {
+  position: fixed;
+  z-index: 60;
+  left: 50%;
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs--1);
+  box-shadow: var(--shadow-menu);
+  white-space: nowrap;
+}
+
+.banner button {
+  min-height: 36px;
+  padding: 0 var(--s-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.offline {
+  background: var(--surface-2);
+}

@@ -1,0 +1,133 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--s-3) var(--s-4) var(--s-8);
+}
+
+@media (min-width: 700px) {
+  .page {
+    padding: var(--s-5) var(--s-5) var(--s-8);
+  }
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.head h1 {
+  font-size: var(--fs-3);
+}
+
+.head p {
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+}
+
+.sheet {
+  padding: var(--s-3) 0 var(--s-4);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.group h2 {
+  font-size: var(--fs-1);
+  padding: var(--s-2) 0;
+}
+
+.group h2 a {
+  text-decoration: none;
+}
+
+.group h2 a:hover {
+  color: var(--accent-strong);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-1) var(--s-3);
+  align-items: center;
+  padding: var(--s-2) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.what {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.field {
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  min-width: 5.5em;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.removed {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.evidence {
+  grid-column: 1 / -1;
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.reverted {
+  opacity: 0.55;
+}
+
+.revert {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  min-height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: var(--fs--1);
+  font-weight: 600;
+}
+
+.revert:disabled {
+  border-style: dashed;
+  cursor: default;
+}
+
+.more {
+  display: block;
+  margin: var(--s-5) auto 0;
+  min-height: 40px;
+  padding: 0 var(--s-5);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-weight: 600;
+}
+
+.empty {
+  padding: var(--s-5) 0;
+  color: var(--ink-soft);
+}

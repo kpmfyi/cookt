@@ -1,0 +1,419 @@
+.cook {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* --- top bar --- */
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 56px;
+  padding: calc(env(safe-area-inset-top) + var(--s-1)) var(--s-3) var(--s-1);
+  border-bottom: 1px solid var(--rule);
+}
+
+.exit {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.exit:hover {
+  background: var(--surface-2);
+}
+
+.hero {
+  flex: none;
+}
+
+.titleBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-0);
+  font-family: var(--font-body);
+  font-variation-settings: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.counter {
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.counter b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.wake {
+  font-size: var(--fs--2);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.mise {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  height: 38px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-weight: 600;
+  font-size: var(--fs--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.mise[aria-expanded="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* --- open recipes (empty unless another recipe is open) --- */
+.tabs {
+  min-width: 0;
+}
+
+/* --- body --- */
+.body {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.ingredients {
+  display: none;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ingredientsOpen {
+  display: block;
+  position: absolute;
+  z-index: 5;
+  inset: 0 var(--s-2) var(--s-2);
+}
+
+.ingredientTicket {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+}
+
+.ingredientHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) var(--s-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.ingredientHead h2 {
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.ingredientHead span {
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.ingredientScroll {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--s-4) var(--s-4);
+}
+
+/* --- rail --- */
+.railWrap {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.rail {
+  display: flex;
+  height: 100%;
+  align-items: flex-start; /* tickets hang from the rail at their own height */
+  gap: var(--gap);
+  padding: var(--s-3) 0 var(--s-3);
+  --gap: var(--s-3);
+  --card: min(86vw, 640px);
+  transition: transform var(--dur-rail) var(--ease-rail);
+  will-change: transform;
+}
+
+.dragging {
+  transition: none;
+}
+
+.ticket {
+  flex: none;
+  width: var(--card);
+  overflow: hidden;
+  min-height: min(340px, 62%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-l);
+  opacity: 0.55;
+  transform: scale(0.95);
+  transform-origin: 50% 40%;
+  transition:
+    transform var(--dur-rail) var(--ease-rail),
+    opacity var(--dur-rail) var(--ease-rail);
+}
+
+.current {
+  opacity: 1;
+  transform: none;
+  cursor: default;
+  border-color: var(--rule-strong);
+}
+
+.doneTicket {
+  background: var(--bg-deep);
+}
+
+.ticketInner {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  border-top: 4px solid transparent;
+}
+
+.current .ticketInner {
+  border-top-color: var(--accent);
+}
+
+.doneTicket .num {
+  color: var(--ink-faint);
+}
+
+.stepHead {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.num {
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-axes);
+  letter-spacing: var(--display-tracking);
+  font-weight: 500;
+  font-size: clamp(3.4rem, 8vh, 5.4rem);
+  line-height: 0.8;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.stepMeta {
+  padding-bottom: 4px;
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.text {
+  font-size: var(--fs-1);
+  line-height: 1.42;
+  text-wrap: pretty;
+}
+
+.nextTime {
+  margin-bottom: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--gold);
+  background: var(--gold-wash);
+  font-size: var(--fs-0);
+}
+
+.nextTime b {
+  display: block;
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.finish {
+  display: grid;
+  gap: var(--s-4);
+  align-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.finish h2 {
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-axes);
+  letter-spacing: var(--display-tracking);
+  font-weight: var(--display-weight);
+  font-size: var(--fs-5);
+}
+
+/* --- bottom --- */
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3) calc(env(safe-area-inset-bottom) + var(--s-2));
+  min-height: 72px;
+  border-top: 1px solid var(--rule);
+}
+
+.timers {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.nav {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: 52px;
+  min-width: 52px;
+  padding: 0 var(--s-5);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: var(--fs-0);
+}
+
+.nav:disabled {
+  opacity: 0.35;
+}
+
+.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  min-width: 140px;
+}
+
+.label {
+  display: inline;
+}
+
+/* iPad (landscape and portrait) and larger: mise pinned left, the rail on the right. */
+@media (min-width: 760px) {
+  .body {
+    grid-template-columns: minmax(300px, 32%) 1fr;
+    gap: var(--s-4);
+    padding-left: var(--s-4);
+  }
+  .ingredients,
+  .ingredientsOpen {
+    position: static;
+    display: block;
+    padding: var(--s-3) 0 var(--s-3);
+  }
+  .mise {
+    display: none;
+  }
+  .rail {
+    --card: min(70%, 760px);
+  }
+  .text {
+    font-size: var(--fs-cook);
+    line-height: 1.4;
+  }
+  .ticketInner {
+    padding: var(--s-5) var(--s-6) var(--s-6);
+  }
+}
+
+@media (min-width: 760px) and (orientation: portrait) {
+  .rail {
+    --card: 86%;
+  }
+}
+
+/* Desktop screens: the current step sits at eye level instead of hanging from the top. */
+@media (min-width: 1400px) and (min-height: 860px) {
+  .rail {
+    align-items: center;
+  }
+}
+
+/* Phones on their side: tighter chrome and a smaller step so it fits without scrolling. */
+@media (min-width: 700px) and (max-height: 500px) {
+  .top {
+    min-height: 48px;
+  }
+  .bottom {
+    min-height: 56px;
+    padding-top: var(--s-1);
+  }
+  .nav {
+    height: 44px;
+  }
+  .num {
+    font-size: 2.6rem;
+  }
+  .stepHead {
+    margin-bottom: var(--s-2);
+  }
+  .text {
+    font-size: var(--fs-1);
+  }
+  .ticketInner {
+    padding: var(--s-3) var(--s-5) var(--s-4);
+  }
+}
+
+@media (min-width: 1400px) {
+  .body {
+    grid-template-columns: minmax(320px, 440px) 1fr;
+  }
+  .rail {
+    --card: min(64%, 820px);
+  }
+}

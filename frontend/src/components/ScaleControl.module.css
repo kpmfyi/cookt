@@ -1,0 +1,71 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+}
+
+.stepper button {
+  width: 36px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+}
+
+.stepper button:hover {
+  background: var(--surface-2);
+}
+
+.stepper button:disabled {
+  opacity: 0.35;
+}
+
+.value {
+  min-width: 6.5em;
+  text-align: center;
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.value b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.segmented button {
+  height: 34px;
+  padding: 0 var(--s-3);
+  border: 0;
+  background: transparent;
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.segmented button + button {
+  border-left: 1px solid var(--rule-strong);
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--accent-wash);
+  color: var(--accent-strong);
+  font-weight: 600;
+}

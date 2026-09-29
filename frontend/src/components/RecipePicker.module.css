@@ -1,0 +1,81 @@
+.dialog {
+  width: min(520px, calc(100vw - 16px));
+  max-height: min(720px, calc(100dvh - 32px));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, #111 45%, transparent);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-height: min(700px, calc(100dvh - 40px));
+  padding: var(--s-4) var(--s-5) var(--s-4);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-menu);
+}
+
+.card h2 {
+  font-size: var(--fs-1);
+  margin-bottom: var(--s-3);
+}
+
+.card input {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  font-size: var(--fs-0);
+}
+
+.card input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.results {
+  flex: 1;
+  overflow: auto;
+  list-style: none;
+  margin: var(--s-2) 0 0;
+  padding: 0;
+}
+
+.results button {
+  display: block;
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--s-2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: none;
+  text-align: left;
+}
+
+.results button:hover {
+  color: var(--accent-strong);
+}
+
+.results b {
+  font-weight: 500;
+}
+
+.close {
+  align-self: flex-end;
+  margin-top: var(--s-3);
+  min-height: 40px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-weight: 600;
+}

@@ -1,0 +1,116 @@
+.section + .section {
+  margin-top: var(--s-4);
+}
+
+.heading {
+  padding: var(--s-2) 0 var(--s-1);
+  font-size: var(--fs--1);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(2.2em, max-content) 1fr;
+}
+
+.noAmounts {
+  grid-template-columns: 1fr;
+}
+
+.noAmounts .amount {
+  display: none;
+}
+
+.list > li {
+  display: contents;
+}
+
+.item {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  column-gap: var(--s-3);
+  align-items: baseline;
+  width: 100%;
+  min-height: 50px;
+  padding: var(--s-3) 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  line-height: var(--lh-snug);
+}
+
+.list > li + li > .item {
+  border-top: 1px solid var(--rule);
+}
+
+.item:hover {
+  background: var(--surface-2);
+}
+
+.amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* the ingredient's emoji runs inline, a consistent breath before the words */
+.food,
+.foodBlank {
+  display: inline-grid;
+  margin-right: 0.4em;
+  vertical-align: -0.2em;
+}
+
+/* no emoji for this line: keep the words in line with their neighbours */
+.foodBlank {
+  width: 21px;
+  height: 1px;
+}
+
+.checked {
+  color: var(--ink-faint);
+}
+
+.checked .text,
+.checked .amount {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.big .item {
+  font-size: var(--fs-1);
+}
+
+/* Narrow columns (the iPad-portrait rail): amount runs inline before the text instead of
+   in its own column, cookbook style, so long lines don't wrap one word at a time. */
+@container ingredients (max-width: 290px) {
+  .list {
+    display: block;
+  }
+  .item {
+    display: block;
+    padding: var(--s-2) 0;
+  }
+  .amount:empty {
+    display: none;
+  }
+  .amount {
+    margin-right: 0.35em;
+    text-align: left;
+    white-space: normal;
+  }
+}

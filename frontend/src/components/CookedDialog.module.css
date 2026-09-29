@@ -1,0 +1,105 @@
+.dialog {
+  width: min(440px, calc(100vw - 24px));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, #111 45%, transparent);
+}
+
+.card {
+  padding: var(--s-5);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-menu);
+}
+
+.card h2 {
+  font-size: var(--fs-2);
+  margin-bottom: var(--s-4);
+}
+
+.field {
+  display: grid;
+  gap: var(--s-1);
+  margin-bottom: var(--s-4);
+  font-size: var(--fs--1);
+  font-weight: 600;
+}
+
+.field input,
+.field textarea,
+.field select {
+  min-height: var(--tap);
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  font-size: var(--fs-0);
+  font-weight: 400;
+}
+
+.field textarea {
+  min-height: 4.5em;
+  resize: vertical;
+}
+
+.choices {
+  display: flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.choices button {
+  flex: 1;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.choices button + button {
+  border-left: 1px solid var(--rule-strong);
+}
+
+.choices button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s-2);
+}
+
+.primary,
+.secondary {
+  min-height: var(--tap);
+  padding: 0 var(--s-5);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.primary {
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.secondary {
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+}
+
+.error {
+  color: var(--danger);
+  margin-bottom: var(--s-3);
+}

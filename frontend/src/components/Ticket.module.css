@@ -1,0 +1,9 @@
+/* A plain block. Pages are flat; anything that needs a raised surface styles itself. */
+.ticket {
+  position: relative;
+  color: var(--ink);
+}
+
+.plain {
+  border-top: 1px solid var(--rule);
+}

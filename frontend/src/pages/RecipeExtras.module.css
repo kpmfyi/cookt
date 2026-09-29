@@ -1,0 +1,198 @@
+/* Supporting sections: plain text, ruled lists, one measure. */
+
+.nutrients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  font-size: var(--fs-0);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.nutrients > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nutrients b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.details {
+  margin-top: var(--s-3);
+  font-size: var(--fs--1);
+}
+
+.details summary {
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  list-style: none;
+}
+
+.details summary::-webkit-details-marker {
+  display: none;
+}
+
+.breakdown {
+  list-style: none;
+  margin: var(--s-2) 0 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+.breakdown li {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-2) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.breakdown li[data-excluded] {
+  color: var(--ink-faint);
+}
+
+.lineText {
+  font-weight: 600;
+}
+
+.lineMatch {
+  color: var(--ink-soft);
+}
+
+.lineNums {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.rowActions {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.rowActions button {
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  color: var(--accent-strong);
+  font-size: var(--fs--2);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* pairings: titles only */
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+.links li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.links li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.links a {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.marks {
+  flex: none;
+}
+
+.pairActions {
+  display: flex;
+  gap: 2px;
+}
+
+.pairActions button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.pairActions button:hover {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.done {
+  font-size: var(--fs--1);
+  color: var(--accent-strong);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: var(--measure);
+  margin-bottom: var(--s-3);
+  text-wrap: pretty;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.tagKind {
+  color: var(--ink-faint);
+  text-transform: capitalize;
+}
+
+.source {
+  margin-top: var(--s-2);
+  font-size: var(--fs--1);
+}
+
+.planRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+}
+
+.planGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.dateInput {
+  min-height: 40px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: var(--fs--1);
+}

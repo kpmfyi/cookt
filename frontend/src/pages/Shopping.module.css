@@ -1,0 +1,248 @@
+.page > * {
+  min-width: 0;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--s-3) var(--s-4) var(--s-8);
+  display: grid;
+  gap: var(--s-4);
+}
+
+@media (min-width: 700px) {
+  .page {
+    padding: var(--s-5) var(--s-5) var(--s-8);
+  }
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+}
+
+.head h1 {
+  font-size: var(--fs-3);
+}
+
+.tabs {
+  display: inline-flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.tabs button {
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+  font-weight: 500;
+}
+
+.tabs button + button {
+  border-left: 1px solid var(--rule-strong);
+}
+
+.tabs button[aria-pressed="true"] {
+  background: var(--accent-wash);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.sheet {
+  padding: 0;
+}
+
+.sheet h2 {
+  font-size: var(--fs-1);
+  margin-bottom: var(--s-2);
+}
+
+.add {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.add input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--tap);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+}
+
+.add input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.primary,
+.secondary {
+  min-height: var(--tap);
+  padding: 0 var(--s-4);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.primary {
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.secondary {
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  min-height: 40px;
+  font-size: var(--fs--1);
+}
+
+.section h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  padding-bottom: var(--s-1);
+  border-bottom: 1px solid var(--rule-strong);
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(3em, max-content) 1fr auto;
+}
+
+.items > li {
+  display: contents;
+}
+
+.row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  column-gap: var(--s-3);
+  align-items: baseline;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--s-3) 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  text-align: left;
+}
+
+.amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.name {
+  font-weight: 400;
+}
+
+.food {
+  margin-right: 0.4em;
+  vertical-align: -0.2em;
+}
+
+.from {
+  display: block;
+  font-size: var(--fs--2);
+  color: var(--ink-soft);
+}
+
+.checked {
+  color: var(--ink-faint);
+}
+
+.checked .name,
+.checked .amount {
+  text-decoration: line-through;
+}
+
+.status {
+  margin-top: var(--s-2);
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+}
+
+.staples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+  margin: var(--s-3) 0;
+}
+
+.staple {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: 0 0 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs--1);
+}
+
+.staple button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.make {
+  list-style: none;
+  margin: var(--s-2) 0 0;
+  padding: 0;
+}
+
+.make li {
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.make a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.make a:hover {
+  color: var(--accent-strong);
+}
+
+.muted {
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+}
+
+.marks {
+  margin-left: var(--s-2);
+}

@@ -1,0 +1,28 @@
+# cookt as a user service. Paths assume the checkout is ~/projects/cookt; enable lingering
+# (loginctl enable-linger) so it starts at boot without a login:
+#   cp deploy/cookt-household.service ~/.config/systemd/user/ &&
+#   systemctl --user daemon-reload && systemctl --user enable --now cookt-household.service
+# Machine-specific settings (COOKT_VAPID_SUBJECT, COOKT_PIN, model names) go in a drop-in:
+#   systemctl --user edit cookt-household.service
+[Unit]
+Description=cookt household recipe app (port 8088)
+Documentation=file://%h/projects/cookt/README.md
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=%h/projects/cookt
+Environment=COOKT_HOST=0.0.0.0
+Environment=COOKT_PORT=8088
+# The project venv directly (not `uv run`), so the server never holds the uv cache lock.
+ExecStart=%h/projects/cookt/.venv/bin/python -m cookt
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

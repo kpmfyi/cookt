@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Recipe export</title></head>
+  <body>
+    <div class="recipe" itemscope itemtype="http://schema.org/Recipe">
+      <h1 itemprop="name">Lemon Rice</h1>
+      <p>
+        <b>Prep Time:</b> <span itemprop="prepTime">10 mins</span>
+        <b>Servings:</b> <span itemprop="recipeYield">Yield: 4 bowls</span>
+        <b>Source:</b>
+        <a itemprop="url" href="https://recipes.example.test/lemon-rice">
+          <span itemprop="author">Example Kitchen</span>
+        </a>
+      </p>
+      <div class="ingredients">
+        <p itemprop="recipeIngredient"><strong>1</strong> cup rice</p>
+        <p itemprop="recipeIngredient"><strong>2</strong> cups stock</p>
+      </div>
+      <div itemprop="recipeInstructions">
+        <p>Instructions Checklist</p>
+        <p>Simmer the rice in stock until tender.</p>
+      </div>
+      <div itemprop="comment"><p>Finish with lemon zest.</p></div>
+    </div>
+    <div class="recipe" itemscope itemtype="https://schema.org/Recipe">
+      <h1 itemprop="name">Quick Beans</h1>
+      <p>
+        <b>Cook Time:</b> <span itemprop="cookTime">20 mins</span>
+        <b>Source:</b>
+        <a itemprop="url" href="https://recipes.example.test/quick-beans">
+          <span itemprop="author">Example Kitchen</span>
+        </a>
+      </p>
+      <div class="ingredients">
+        <p itemprop="recipeIngredient"><strong>2</strong> cans black beans</p>
+        <p itemprop="recipeIngredient"><strong>1</strong> teaspoon cumin</p>
+      </div>
+      <div itemprop="recipeInstructions">
+        <p>Stir the beans and cumin together; simmer for 20 minutes.</p>
+      </div>
+    </div>
+  </body>
+</html>

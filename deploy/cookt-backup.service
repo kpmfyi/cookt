@@ -1,0 +1,11 @@
+# Nightly backup of data/ (see scripts/backup.sh). Paths assume the checkout is ~/projects/cookt.
+# Install: cp deploy/cookt-backup.* ~/.config/systemd/user/ &&
+#   systemctl --user daemon-reload && systemctl --user enable --now cookt-backup.timer
+[Unit]
+Description=cookt nightly backup (SQLite .backup + images tar, 14 kept) and restore check
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/cookt
+ExecStart=%h/projects/cookt/scripts/backup.sh
+ExecStartPost=%h/projects/cookt/scripts/restore-verify.sh

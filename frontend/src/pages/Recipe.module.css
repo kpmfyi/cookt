@@ -1,0 +1,548 @@
+/*
+ * Recipe page: the title, one line of facts, then the recipe. Nothing else above it.
+ *
+ *   phone (<700)    title, Ingredients/Method tabs, the recipe, then the supporting
+ *                   sections in one column.
+ *   tablet (≥700)   two columns: ingredients (sticky) on the left, method on the right.
+ *                   The supporting sections continue below in the method column's width.
+ *   ≥1100           the page is capped at a comfortable reading width and centred.
+ *
+ * --rail is the ingredient column's width; --pad the inner gutter everything aligns to.
+ */
+
+.page {
+  --pad: var(--s-4);
+  padding-bottom: var(--s-8);
+}
+
+.missing {
+  padding: var(--s-7) var(--s-4);
+  text-align: center;
+}
+
+.missing p {
+  margin-top: var(--s-3);
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  height: 52px;
+  padding: 0 var(--s-2);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: saturate(1.2) blur(12px);
+  border-bottom: 1px solid transparent;
+}
+
+.topbar:has(.topTitle[data-shown="true"]) {
+  border-bottom-color: var(--rule);
+}
+
+.iconButton {
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.iconButton:hover {
+  background: var(--surface-2);
+}
+
+.iconButton[aria-pressed="true"] {
+  color: var(--accent);
+}
+
+/* 📌 keep open in a tab: faded until kept */
+.keep[aria-pressed="false"] {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.topTitle {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: var(--fs--1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.topTitle[data-shown="true"] {
+  opacity: 1;
+}
+
+.cook {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  margin-left: var(--s-1);
+  padding: 0 var(--s-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cook:hover {
+  background: var(--accent-strong);
+}
+
+.layout {
+  padding: 0 var(--s-4);
+}
+
+/* ---------- header ---------- */
+
+.head {
+  padding: var(--s-4) 0 var(--s-5);
+}
+
+.head h1 {
+  font-size: var(--fs-4);
+  line-height: 1.06;
+  max-width: 22ch;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-1) var(--s-2);
+  margin-top: var(--s-3);
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.facts > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.facts > span + span {
+  margin-left: var(--s-2);
+}
+
+.facts:empty {
+  display: none;
+}
+
+.marks {
+  margin-right: var(--s-1);
+  color: var(--ink);
+}
+
+.facts a {
+  color: inherit;
+}
+
+/* ---------- tabs (phone) ---------- */
+
+.tabs {
+  position: sticky;
+  top: calc(var(--nav-h) + 52px);
+  z-index: 15;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 calc(-1 * var(--s-4));
+  padding: 0 var(--s-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-weight: 500;
+  box-shadow: inset 0 -2px 0 transparent;
+}
+
+.tabs button[aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* ---------- the recipe: ingredients + method ---------- */
+
+.panel {
+  padding: var(--s-5) 0 var(--s-6);
+}
+
+.panel h2 {
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Phone: the tabs already name the panel, so its heading is for screen readers only. */
+@media (max-width: 699px) {
+  .step {
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+  }
+  .panel h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .panelHead:not(:has(.yield)) {
+    margin-bottom: 0;
+  }
+}
+
+.panelHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-bottom: var(--s-3);
+}
+
+.yield {
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+}
+
+.ingredientBody {
+  margin-top: var(--s-4);
+}
+
+.hiddenPhone {
+  display: none;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stepSection + .stepSection {
+  margin-top: var(--s-5);
+}
+
+.stepHeading {
+  font-size: var(--fs-0);
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: var(--s-2);
+  padding: var(--s-4) 0;
+}
+
+.step + .step {
+  border-top: 1px solid var(--rule);
+}
+
+.num {
+  padding-top: 0.15em;
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-axes);
+  letter-spacing: var(--display-tracking);
+  font-weight: 500;
+  font-size: var(--fs-1);
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--accent-strong);
+}
+
+.stepText {
+  font-size: var(--fs-0);
+  line-height: 1.65;
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.nextTime {
+  margin-bottom: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--gold);
+  background: var(--gold-wash);
+}
+
+.nextTime h3 {
+  margin-bottom: var(--s-1);
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nextTime ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nextTime li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-2);
+  align-items: start;
+}
+
+.nextTime li + li {
+  margin-top: var(--s-2);
+}
+
+.small {
+  border: 0;
+  background: none;
+  padding: var(--s-1) 0;
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.small:hover {
+  color: var(--ink);
+}
+
+.notes {
+  margin-top: var(--s-5);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs--1);
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.notes p + p {
+  margin-top: var(--s-2);
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 0 var(--s-4);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs--1);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryButton {
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.primaryButton:hover {
+  background: var(--accent-strong);
+}
+
+.secondaryButton {
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink);
+}
+
+.secondaryButton:hover {
+  background: var(--surface-2);
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+}
+
+.muted {
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+}
+
+/* ---------- supporting sections ---------- */
+
+.more {
+  margin-top: var(--s-4);
+}
+
+.block {
+  min-width: 0;
+  padding: var(--s-5) 0 var(--s-6);
+  border-top: 1px solid var(--rule);
+}
+
+.block h2 {
+  margin-bottom: var(--s-4);
+  font-size: var(--fs--2);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+.log li {
+  display: grid;
+  grid-template-columns: 6.5em minmax(0, 1fr) auto;
+  gap: var(--s-2);
+  padding: var(--s-3) 0;
+  font-size: var(--fs--1);
+}
+
+.log li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.log time {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.quietRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-top: var(--s-3);
+}
+
+.quietButton {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: var(--fs--1);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.quietButton:hover {
+  color: var(--ink);
+}
+
+/* ---------- tablet and up: two columns ---------- */
+
+@media (min-width: 700px) {
+  .page {
+    --rail: 280px;
+    --pad: var(--s-5);
+  }
+  .topbar {
+    top: var(--nav-h);
+    padding: 0 max(var(--s-4), calc((100% - 1120px) / 2 + var(--s-4)));
+  }
+  .layout {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 var(--s-5);
+  }
+  .head {
+    padding: var(--s-4) 0 var(--s-5);
+    border-bottom: 1px solid var(--rule);
+  }
+  .head {
+    padding: var(--s-5) 0 var(--s-6);
+  }
+  .head h1 {
+    font-size: var(--fs-5);
+    line-height: 1.04;
+  }
+  .tabs {
+    display: none;
+  }
+  .hiddenPhone {
+    display: block;
+  }
+  .sheet {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--s-7);
+    align-items: start;
+  }
+  .panel {
+    padding: var(--s-6) 0 var(--s-7);
+  }
+  .panel h2 {
+    margin-bottom: var(--s-3);
+  }
+  .ingredientsPanel {
+    container: ingredients / inline-size;
+    position: sticky;
+    top: calc(var(--nav-h) + 52px);
+    max-height: calc(100dvh - var(--nav-h) - 52px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  .ingredientsPanel::-webkit-scrollbar {
+    display: none;
+  }
+  /* the supporting sections sit under the method, in the method column */
+  .more {
+    margin-top: 0;
+    padding-left: calc(var(--rail) + var(--s-7));
+  }
+}
+
+/* Phones on their side: no sticky column; everything scrolls. */
+@media (min-width: 700px) and (max-height: 500px) {
+  .head {
+    padding: var(--s-3) 0 var(--s-4);
+  }
+  .head h1 {
+    font-size: var(--fs-3);
+  }
+  .ingredientsPanel {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .page {
+    --rail: 320px;
+  }
+}

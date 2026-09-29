@@ -1,0 +1,116 @@
+.emoji {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  font-family: var(--font-emoji);
+  font-style: normal;
+  line-height: 1;
+  vertical-align: middle;
+  position: relative;
+}
+
+/* a red slash for "-free": the thing shown is the thing left out */
+.slashed::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  width: 0.14em;
+  height: 88%;
+  border-radius: 1em;
+  background: #e0332b;
+  box-shadow: 0 0 0 0.06em var(--bg);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.art,
+.flag {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+}
+
+.edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.18;
+  stroke-width: 1;
+}
+
+.unknown {
+  fill: var(--ink-faint);
+}
+
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  vertical-align: middle;
+}
+
+.cuisine {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* motion, only on the moments that matter (all off under prefers-reduced-motion) */
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.pop {
+  animation: pop var(--dur-pop) var(--ease-pop);
+}
+
+.spin {
+  animation: spin 2.4s linear infinite;
+}
+
+.pulse {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-6%) rotate(3deg);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .pop,
+  .spin,
+  .pulse {
+    animation: none;
+  }
+}

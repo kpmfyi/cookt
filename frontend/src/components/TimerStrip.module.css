@@ -1,0 +1,128 @@
+.strip {
+  position: fixed;
+  z-index: 25;
+  left: 0;
+  right: 0;
+  bottom: calc(60px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: saturate(1.2) blur(12px);
+  border-top: 1px solid var(--rule);
+  scrollbar-width: none;
+}
+
+@media (min-width: 700px) {
+  .strip {
+    bottom: 0;
+    padding: var(--s-2) var(--s-5);
+  }
+}
+
+.inline {
+  position: static;
+  background: transparent;
+  backdrop-filter: none;
+  border-top: 0;
+  padding: 0;
+}
+
+.timer {
+  --tone: var(--recipe, var(--gold));
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  padding-left: 0;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--tone) 12%, var(--bg));
+  color: var(--ink);
+  border: 2px solid var(--tone);
+}
+
+.running {
+  background: color-mix(in srgb, var(--tone) 30%, var(--bg));
+}
+
+.done {
+  animation: flash 1s steps(2, jump-none) infinite;
+}
+
+@keyframes flash {
+  from {
+    background: color-mix(in srgb, var(--tone) 45%, var(--bg));
+  }
+  to {
+    background: var(--bg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .done {
+    animation: none;
+    background: color-mix(in srgb, var(--tone) 12%, var(--bg));
+    outline: 3px solid var(--tone);
+  }
+}
+
+/* Emoji, label and time; a button that switches recipe when the timer belongs to another one. */
+.face {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 0 0 var(--s-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+button.face:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.label {
+  max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs--1);
+  font-weight: 500;
+}
+
+.time {
+  font-weight: 600;
+  font-size: var(--fs-1);
+  font-variant-numeric: tabular-nums lining-nums;
+  min-width: 3.4ch;
+  text-align: right;
+  margin-right: var(--s-1);
+}
+
+.big .time {
+  font-size: var(--fs-2);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  font-size: var(--fs--1);
+}
+
+.icon:hover {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}

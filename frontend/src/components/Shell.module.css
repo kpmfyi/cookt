@@ -1,0 +1,131 @@
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  padding-bottom: calc(var(--tabbar-h, 0px) + env(safe-area-inset-bottom));
+}
+
+/* Phone: bottom tab bar */
+.tabbar {
+  --tabbar-h: 60px;
+  position: fixed;
+  z-index: 30;
+  inset: auto 0 0 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: color-mix(in srgb, var(--chrome) 94%, transparent);
+  backdrop-filter: saturate(1.2) blur(12px);
+  border-top: 1px solid var(--rule);
+  color: var(--on-chrome);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: var(--fs--2);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--chrome-soft);
+}
+
+.tab[aria-current="page"] {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  margin-left: 4px;
+  padding: 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 1px;
+}
+
+.wordmark {
+  display: none;
+  margin-right: var(--s-4);
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-axes);
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.person {
+  display: none;
+}
+
+/* iPad / desktop: a quiet top bar, text only */
+@media (min-width: 700px) {
+  .tabbar {
+    --tabbar-h: 0px;
+    position: sticky;
+    inset: 0 auto auto 0;
+    order: -1;
+    display: flex;
+    height: calc(var(--bar-h) + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) var(--s-5) 0;
+    justify-content: start;
+    align-items: center;
+    gap: var(--s-1);
+    border-top: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tab {
+    flex-direction: row;
+    gap: var(--s-2);
+    height: 36px;
+    padding: 0 var(--s-3);
+    border-radius: var(--radius-s);
+    font-size: var(--fs--1);
+    white-space: nowrap;
+  }
+  .tab:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+  .tab[aria-current="page"] {
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--accent);
+    border-radius: 0;
+  }
+  .main {
+    padding-bottom: 0;
+  }
+  .wordmark {
+    display: block;
+  }
+  .person {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 700px) and (max-height: 500px) {
+  .tabbar {
+    position: relative;
+    height: 56px;
+  }
+}
